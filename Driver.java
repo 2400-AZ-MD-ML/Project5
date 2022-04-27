@@ -14,7 +14,7 @@ public class Driver {
         graph.addVertex("G");
         graph.addVertex("H");
         graph.addVertex("I");
-      
+       
 		System.out.println("Number of graph's vertex = " + graph.getNumberOfVertices());//5
 		
 
@@ -38,10 +38,10 @@ public class Driver {
 			System.out.print(bfsTraversalOrder.dequeue() + " ");
     
 		
-		// System.out.println("\nDFS traverse graph with inital vertex 'A'...");
-		// QueueInterface<String> dfsTraversalOrder = graph.getDepthFirstTraversal("A");
-		// while(!dfsTraversalOrder.isEmpty())
-		// 	System.out.print(dfsTraversalOrder.dequeue() + " ");
+		System.out.println("\nDFS traverse graph with inital vertex 'A'...");
+		QueueInterface<String> dfsTraversalOrder = graph.getDepthFirstTraversal("A");
+		while(!dfsTraversalOrder.isEmpty())
+			System.out.print(dfsTraversalOrder.dequeue() + " ");
 		
 
 		

@@ -24,7 +24,7 @@ public interface GraphInterface<T> extends BasicGraphInterface<T>,
                 /** Performs a topological sort of the vertices in this graph without cycles.
                     @return  A stack of vertex labels in topological order, beginning
                              with the stack's top. */
-                public StackInterface<T> getTopologicalOrder();
+                // public StackInterface<T> getTopologicalOrder();
              
                 /** Finds the shortest-length path between two given vertices in this graph.
                     @param begin  An object that labels the path's origin vertex.

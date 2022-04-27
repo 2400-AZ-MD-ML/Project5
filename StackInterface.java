@@ -1,4 +1,4 @@
-package Project2;
+package Project5;
 import java.util.EmptyStackException;
 /**
    An interface for the ADT stack.

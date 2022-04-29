@@ -184,7 +184,7 @@ public boolean isVisited() {
 		}
 	}
 	
-		//Inner class based of NeighborIterator
+		//Inner class based off NeighborIterator
 	private class WeightIterator implements Iterator{
 		
 		private Iterator<Edge> edgesIterator;

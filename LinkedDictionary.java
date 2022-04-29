@@ -1,25 +1,23 @@
 package Project5;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.io.Serializable;
 
 /**
  * A class that implements the ADT dictionary by using a chain of nodes.
  * The dictionary is not sorted and has distinct search keys.
  *
  * @author Frank M. Carrano
- * @version 2.0
+ * @version 5.0
  */
-public class LinkedDictionary<K, V> 
-             implements DictionaryInterface<K, V>, Serializable
+public class LinkedDictionary<K, V> implements DictionaryInterface<K, V>
 {
 	private Node firstNode;   // reference to first node of chain
-	private int  currentSize; // number of entries 
+	private int  numberOfEntries; // number of entries 
 	
 	public LinkedDictionary()
 	{
-		firstNode = null;		
-    currentSize = 0;
+	firstNode = null;		
+    numberOfEntries = 0;
 	} // end default constructor
 	
 	// 18.25
@@ -40,7 +38,7 @@ public class LinkedDictionary<K, V>
       Node newNode = new Node(key, value);
       newNode.setNextNode(firstNode);
       firstNode = newNode;
-      currentSize++;
+      numberOfEntries++;
     }
     else
     {
@@ -80,7 +78,7 @@ public class LinkedDictionary<K, V>
 					nodeBefore.setNextNode(nodeAfter);        // disconnect the node to be removed
 
 				result = currentNode.getValue();            // get ready to return removed entry
-			  currentSize--;                              // decrease length for both cases
+				numberOfEntries--;                              // decrease length for both cases
 			} // end if
 		} // end if
 			
@@ -114,7 +112,7 @@ public class LinkedDictionary<K, V>
 
   public boolean isEmpty()
   {
-    return currentSize == 0;
+    return numberOfEntries == 0;
   } // end isEmpty
 	
   public boolean isFull()
@@ -124,13 +122,13 @@ public class LinkedDictionary<K, V>
 
   public int getSize()
   {
-    return currentSize;
+    return numberOfEntries;
   } // end getSize
 
 	public final void clear()
 	{ 
 		firstNode = null;		
-    currentSize = 0;
+		numberOfEntries = 0;
   } // end clear
 
 	public Iterator<K> getKeyIterator()
@@ -143,7 +141,7 @@ public class LinkedDictionary<K, V>
 		return new ValueIterator();
 	} // end getValueIterator
 
-  // 18.26
+	//Based off Vertex's Neighbor/Weight Iterator class
 	private class KeyIterator implements Iterator<K>
 	{
 		private Node nextNode;
@@ -160,7 +158,7 @@ public class LinkedDictionary<K, V>
 		
 		public K next()
 		{
-			K result;// = null; // null not used or needed here
+			K result;
 			
 			if (hasNext())
 			{
@@ -214,11 +212,11 @@ public class LinkedDictionary<K, V>
 		
 		public void remove()
 		{
-			throw new java.lang.UnsupportedOperationException();
+			throw new UnsupportedOperationException();
 		} // end remove
 	} // end getValueIterator
-
-	private class Node implements Serializable
+	//Given
+	private class Node 
 	{
 		private K key;
 		private V value;

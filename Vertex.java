@@ -3,7 +3,12 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
-
+/**
+ A class of vertices for a graph.
+ @author Frank M. Carrano
+ @author Timothy M. Henry
+ @version 5.0
+ */
 class Vertex<T> implements VertexInterface<T>, java.io.Serializable {
 
 	private T label;
@@ -19,8 +24,28 @@ class Vertex<T> implements VertexInterface<T>, java.io.Serializable {
 		previousVertex = null;
 		cost = 0;
 	}
-	
+	/* Implementations of the vertex operations go here.
+   . . . */
+   //Returns label
+   public T getLabel() {
+	return label;
+}
 
+//Changes visited for a vertex to true
+public void visit() {
+	visited = true;
+}
+
+//Changes visited for a vertex to false
+public void unvisit() {
+	visited = false;
+}
+
+//Returns if the vertex was visited
+public boolean isVisited() {
+	return visited;
+}
+	//Provided class
 	protected class Edge implements java.io.Serializable {
 		private VertexInterface<T> vertex;
 		private double weight;
@@ -29,7 +54,12 @@ class Vertex<T> implements VertexInterface<T>, java.io.Serializable {
 		protected Edge(VertexInterface<T> endVertex, double edgeWeight){
 			vertex = endVertex;
 			weight = edgeWeight;
-		}
+		} // end constructor
+		protected Edge(VertexInterface<T> endVertex)
+		{
+		   vertex = endVertex;
+		   weight = 0;
+		} // end constructor
 		
 		protected VertexInterface<T> getEndVertex(){
 			return vertex;
@@ -38,86 +68,57 @@ class Vertex<T> implements VertexInterface<T>, java.io.Serializable {
 			return weight;
 		}
 	}
+	//Makes a connection for the end vertex
+	public boolean connect(VertexInterface<T> endVertex) {
+		return connect(endVertex, 0);
+	}
 
-	
-	private class NeighborIterator implements Iterator<VertexInterface<T>>{
+		//provided
+	public Iterator<VertexInterface<T>> getNeighborIterator() {
+		return new NeighborIterator();
+	}
+		//returns an instance of the privateinner class WeightIterator
+	public Iterator getWeightIterator() {
+		return new WeightIterator();
+	}
 
-		Iterator<Edge> edgesIterator;
-		private NeighborIterator() {
-			edgesIterator = edgeList.iterator();
-		}
-		@Override
-		public boolean hasNext() {
-			return edgesIterator.hasNext();
-		}
+		//provided
+	public boolean hasNeighbor() {
+		return !(edgeList.isEmpty());
+	}
+		//returns the previousVertex value
+	public VertexInterface<T> getPredecessor() {
+		return previousVertex;
+	}
 
-		@Override
-		public VertexInterface<T> next() {
-			VertexInterface<T> nextNeighbor = null;
-			if(edgesIterator.hasNext()){
-				Edge edgeToNextNeighbor = edgesIterator.next();
-				nextNeighbor = edgeToNextNeighbor.getEndVertex();
-			}
-			else
-				throw new NoSuchElementException();
-			return nextNeighbor;
-		}
+		//Returns whether the previousVertex value was null or not
+	public boolean hasPredecessor() {
+		return previousVertex != null;
+	}
 
-		@Override
-		public void remove() {
-			throw new UnsupportedOperationException();
-		}
+		//changes the cost
+	public void setCost(double newCost) {
+		cost = newCost;
+	}
+
+		//returns the cost
+	public double getCost() {
+		return cost;
 	}
 	
-	
-	private class WeightIterator implements Iterator{
-		
-		private Iterator<Edge> edgesIterator;
-		private WeightIterator(){
-			edgesIterator = edgeList.iterator();
+		//provided
+	public boolean equals(Object other){
+		boolean result;
+		if((other == null) || (getClass() != other.getClass()))
+			result = false;
+		else
+		{
+			Vertex<T> otherVertex = (Vertex<T>)other;
+			result = label.equals(otherVertex.label);
 		}
-		@Override
-		public boolean hasNext() {
-			return edgesIterator.hasNext();
-		}
-		@Override
-		public Object next() {
-			Double result;
-			if(edgesIterator.hasNext()){
-				Edge edge = edgesIterator.next();
-				result = edge.getWeight();
-			}
-			else throw new NoSuchElementException();
-			return (Object)result;
-		}
-		@Override
-		public void remove() {
-			throw new UnsupportedOperationException();
-		}
-		
+		return result;
 	}
-	
-	@Override
-	public T getLabel() {
-		return label;
-	}
-
-	@Override
-	public void visit() {
-		this.visited = true;
-	}
-
-	@Override
-	public void unvisit() {
-		this.visited = false;
-	}
-
-	@Override
-	public boolean isVisited() {
-		return visited;
-	}
-
-	@Override
+	//provided
 	public boolean connect(VertexInterface<T> endVertex, double edgeWeight) {
 	
 		boolean result = false;
@@ -139,26 +140,7 @@ class Vertex<T> implements VertexInterface<T>, java.io.Serializable {
 		return result;
 	}
 
-	
-	public boolean connect(VertexInterface<T> endVertex) {
-		return connect(endVertex, 0);
-	}
-
-
-	public Iterator<VertexInterface<T>> getNeighborIterator() {
-		return new NeighborIterator();
-	}
-
-	public Iterator getWeightIterator() {
-		return new WeightIterator();
-	}
-
-	
-	public boolean hasNeighbor() {
-		return !(edgeList.isEmpty());
-	}
-
-
+		//provided
 	public VertexInterface<T> getUnvisitedNeighbor() {
 		VertexInterface<T> result = null;
 		Iterator<VertexInterface<T>> neighbors = getNeighborIterator();
@@ -170,41 +152,74 @@ class Vertex<T> implements VertexInterface<T>, java.io.Serializable {
 		return result;
 	}
 
-	
+		//Updates/changes the previousVertex
 	public void setPredecessor(VertexInterface<T> predecessor) {
-		this.previousVertex = predecessor;
+		previousVertex = predecessor;
 	}
+		//provided
+	private class NeighborIterator implements Iterator<VertexInterface<T>>{
 
-	
-	public VertexInterface<T> getPredecessor() {
-		return this.previousVertex;
-	}
-
-	@Override
-	public boolean hasPredecessor() {
-		return this.previousVertex != null;
-	}
-
-	@Override
-	public void setCost(double newCost) {
-		cost = newCost;
-	}
-
-	@Override
-	public double getCost() {
-		return cost;
-	}
-	
-
-	public boolean equals(Object other){
-		boolean result;
-		if((other == null) || (getClass() != other.getClass()))
-			result = false;
-		else
-		{
-			Vertex<T> otherVertex = (Vertex<T>)other;
-			result = label.equals(otherVertex.label);
+		Iterator<Edge> edges;
+		private NeighborIterator() {
+			edges = edgeList.iterator();
 		}
-		return result;
+	
+		public boolean hasNext() {
+			return edges.hasNext();
+		}
+
+		
+		public VertexInterface<T> next() {
+			VertexInterface<T> nextNeighbor = null;
+			if(edges.hasNext()){
+				Edge edgeToNextNeighbor = edges.next();
+				nextNeighbor = edgeToNextNeighbor.getEndVertex();
+			}
+			else
+				throw new NoSuchElementException();
+			return nextNeighbor;
+		}
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
 	}
+	
+		//Inner class based of NeighborIterator
+	private class WeightIterator implements Iterator{
+		
+		private Iterator<Edge> edgesIterator;
+		//Constructor
+		private WeightIterator(){
+			edgesIterator = edgeList.iterator();
+		}
+
+		public boolean hasNext() {
+			return edgesIterator.hasNext();
+		}
+		//Returns the object of the next object if it has one
+		public Object next() {
+			Double result;
+			if(edgesIterator.hasNext()){
+				Edge edge = edgesIterator.next();
+				result = edge.getWeight();
+			}
+			else throw new NoSuchElementException();
+			return (Object)result;
+		}
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
+		
+	}
+	
+
+	
+
+
+
+	
+	
+
+	
+	
 }

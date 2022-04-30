@@ -24,27 +24,6 @@ class Vertex<T> implements VertexInterface<T>, java.io.Serializable {
 		previousVertex = null;
 		cost = 0;
 	}
-	/* Implementations of the vertex operations go here.
-   . . . */
-   //Returns label
-   public T getLabel() {
-	return label;
-}
-
-//Changes visited for a vertex to true
-public void visit() {
-	visited = true;
-}
-
-//Changes visited for a vertex to false
-public void unvisit() {
-	visited = false;
-}
-
-//Returns if the vertex was visited
-public boolean isVisited() {
-	return visited;
-}
 	//Provided class
 	protected class Edge implements java.io.Serializable {
 		private VertexInterface<T> vertex;
@@ -68,6 +47,28 @@ public boolean isVisited() {
 			return weight;
 		}
 	}
+	/* Implementations of the vertex operations go here.
+   . . . */
+   //Returns label
+   public T getLabel() {
+	return label;
+}
+
+//Changes visited for a vertex to true
+public void visit() {
+	visited = true;
+}
+
+//Changes visited for a vertex to false
+public void unvisit() {
+	visited = false;
+}
+
+//Returns if the vertex was visited
+public boolean isVisited() {
+	return visited;
+}
+	
 	//Makes a connection for the end vertex
 	public boolean connect(VertexInterface<T> endVertex) {
 		return connect(endVertex, 0);

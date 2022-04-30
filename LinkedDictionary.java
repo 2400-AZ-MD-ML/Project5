@@ -20,7 +20,7 @@ public class LinkedDictionary<K, V> implements DictionaryInterface<K, V>
     numberOfEntries = 0;
 	} // end default constructor
 	
-	// 18.25
+	// 18.25 adds key with a value
   public V add(K key, V value)
   {
     V result = null;
@@ -49,7 +49,7 @@ public class LinkedDictionary<K, V> implements DictionaryInterface<K, V>
     
     return result;
   } // end add
-
+  //removes at given key
   public V remove(K key)
 	{
    	V result = null;  // return value
@@ -85,6 +85,7 @@ public class LinkedDictionary<K, V> implements DictionaryInterface<K, V>
     return result;  
   } // end remove
 
+  //gets value from the key
   public V getValue(K key)
   {
   	V result = null;
@@ -104,38 +105,39 @@ public class LinkedDictionary<K, V> implements DictionaryInterface<K, V>
 		
 		return result;
   } // end getValue
-
+  //returns if the key has a value
 	public boolean contains(K key)
   {
    	return getValue(key) != null; 
   } // end contains
-
+  //Getter method to see if it is empty
   public boolean isEmpty()
   {
     return numberOfEntries == 0;
   } // end isEmpty
-	
+//Getter method to check if it is full
   public boolean isFull()
   {
     return false;
   } // end isFull
-
+  //Returns the size
   public int getSize()
   {
     return numberOfEntries;
   } // end getSize
-
+  //Makes the firstNode that we only have reference to null then resets numberOfEntries
 	public final void clear()
 	{ 
 		firstNode = null;		
 		numberOfEntries = 0;
-  } // end clear
+  } // end clear	
 
+  		//Returns new Instance of KeyIterator
 	public Iterator<K> getKeyIterator()
 	{
 		return new KeyIterator();
 	} // end getKeyIterator
-	
+	//Returns new Instance of ValueIterator
 	public Iterator<V> getValueIterator()
 	{
 		return new ValueIterator();
@@ -178,7 +180,7 @@ public class LinkedDictionary<K, V> implements DictionaryInterface<K, V>
 			throw new UnsupportedOperationException();
 		} // end remove
 	} // end KeyIterator 
-	
+		//Like KeyIterator Based off Vertex's Neighbor/Weight Iterator class
 	private class ValueIterator implements Iterator<V>
 	{
 		private Node nextNode;

@@ -21,23 +21,29 @@ public class DirectedGraph<T> implements GraphInterface<T>
 
 /* Implementations of the graph operations go here. 
    . . . */
+
+   //returns if the graph is empty
    public boolean isEmpty()
 {
  return vertices.isEmpty();
 } // end isEmpty
+//uses inner methods in vertex class to clear the graph
 public void clear()
 {
  vertices.clear();
  edgeCount = 0;
 } // end clear
+//returns the number of vertices in the graph
 public int getNumberOfVertices()
 {
  return vertices.getSize();
 } // end getNumberOfVertices
+//returns number of edges in the graph
 public int getNumberOfEdges()
 {
  return edgeCount;
 } // end getNumberOfEdges
+//returns how many edges that a vertex has
 public boolean hasEdge(T begin, T end)
 {
  boolean found = false;
@@ -68,6 +74,8 @@ vertices.getValueIterator();
  nextVertex.setPredecessor(null);
  } // end while
 } // end resetVertice
+
+//Implementation of BFS
 public QueueInterface<T> getBreadthFirstTraversal(T origin){
    resetVertices();
    QueueInterface<T> traversalOrder = new LinkedQueue<>();
@@ -97,7 +105,7 @@ public QueueInterface<T> getBreadthFirstTraversal(T origin){
 
    return traversalOrder;
 } // end getBreadthFirstTraversal
-
+   //Adds vertex into the graph
 public boolean addVertex(T vertexLabel){
 	VertexInterface<T> addOutcome = vertices.add(vertexLabel, new Vertex<>(vertexLabel));
 	return addOutcome == null;
@@ -112,12 +120,15 @@ public boolean addEdge(T begin, T end, double edgeWeight){
 		edgeCount++;
 		return result;
 }
+//Adds edge to the graph
 public boolean addEdge(T begin, T end){
 	return addEdge(begin, end, 0);
 }
+//Temporray implementation of topologicalOrder
 public StackInterface<T> getTopologicalOrder(){
 	return null;
 }
+//Implementation of DFS
 public QueueInterface<T> getDepthFirstTraversal(T origin){
 	resetVertices();
    QueueInterface<T> traversalOrder = new LinkedQueue<>();
@@ -140,6 +151,7 @@ public QueueInterface<T> getDepthFirstTraversal(T origin){
    }
    return traversalOrder;
 }
+//Given in the textbook at 30.24
 public int getShortestPath(T begin, T end, StackInterface<T> path)
 {
    resetVertices();
@@ -186,6 +198,7 @@ public int getShortestPath(T begin, T end, StackInterface<T> path)
 
    return pathLength;
 } // end getShortestPath
+//Temporary cheapestPath
 public double getCheapestPath(T begin, T end, StackInterface<T> path){
    return 0;
 }

@@ -12,7 +12,6 @@ public class DirectedGraph<T> implements GraphInterface<T>
 {
 	private DictionaryInterface<T, VertexInterface<T>> vertices;
 	private int edgeCount;
-	
 	public DirectedGraph()
 	{
 		vertices = new LinkedDictionary<>();
@@ -151,6 +150,7 @@ public QueueInterface<T> getDepthFirstTraversal(T origin){
    }
    return traversalOrder;
 }
+
 //Given in the textbook at 30.24
 public int getShortestPath(T begin, T end, StackInterface<T> path)
 {

@@ -61,10 +61,10 @@ public boolean hasEdge(T begin, T end)
  } // end if
  return found;
 } // end hasEdge
+//Resets the Vertex to unvisit, cost and makes the predecessor to null
 protected void resetVertices()
 {
- Iterator<VertexInterface<T>> vertexIterator =
-vertices.getValueIterator();
+ Iterator<VertexInterface<T>> vertexIterator = vertices.getValueIterator();
  while (vertexIterator.hasNext())
  {
  VertexInterface<T> nextVertex = vertexIterator.next();

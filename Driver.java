@@ -2,9 +2,7 @@ package Project5;
 public class Driver {
     public static void main(String[] args) {
         GraphInterface<String> graph = new DirectedGraph<>();
-		System.out.println("Graph is empty? " + graph.isEmpty());
-		
-		System.out.println("Adding vertexs...");
+		//Add the Vertices
 		graph.addVertex("A");
         graph.addVertex("B");
 		graph.addVertex("C");
@@ -14,11 +12,7 @@ public class Driver {
         graph.addVertex("G");
         graph.addVertex("H");
         graph.addVertex("I");
-       
-		System.out.println("Number of graph's vertex = " + graph.getNumberOfVertices());//5
-		
-
-		System.out.println("Adding edges...");
+		//Add the Edges
 		graph.addEdge("A", "B");
         graph.addEdge("A", "D");
 		graph.addEdge("A", "E");
@@ -32,16 +26,18 @@ public class Driver {
         graph.addEdge("G", "H");
 		graph.addEdge("H", "I");
         graph.addEdge("I", "F");
-		System.out.println("Breadth First traverse graph with initial vertex 'A'...");
-		QueueInterface<String> bfsTraversalOrder = graph.getBreadthFirstTraversal("A");//A D C B E
-		while(!bfsTraversalOrder.isEmpty())
+		//BFS traverse
+		System.out.println("Breadth First traverse graph with initial vertex 'A' ");
+		QueueInterface<String> bfsTraversalOrder = graph.getBreadthFirstTraversal("A");
+		while(!bfsTraversalOrder.isEmpty()){
 			System.out.print(bfsTraversalOrder.dequeue() + " ");
-    
-		
-		System.out.println("\nDFS traverse graph with inital vertex 'A'...");
+		}
+		//DFS Traverse
+		System.out.println("\nDFS traverse graph with inital vertex 'A' ");
 		QueueInterface<String> dfsTraversalOrder = graph.getDepthFirstTraversal("A");
-		while(!dfsTraversalOrder.isEmpty())
+		while(!dfsTraversalOrder.isEmpty()){
 			System.out.print(dfsTraversalOrder.dequeue() + " ");
+		}
 		
 
 		

@@ -9,7 +9,8 @@ import java.util.NoSuchElementException;
  @author Timothy M. Henry
  @version 5.0
  */
-class Vertex<T> implements VertexInterface<T>, java.io.Serializable {
+class Vertex<T> implements VertexInterface<T>, java.io.Serializable 
+{
 
 	private T label;
 	private List<Edge> edgeList;
@@ -17,7 +18,8 @@ class Vertex<T> implements VertexInterface<T>, java.io.Serializable {
 	private VertexInterface<T> previousVertex;
 	private double cost;
 	
-	public Vertex(T vertexLabel){
+	public Vertex(T vertexLabel)
+	{
 		label = vertexLabel;
 		edgeList = new LinkedList<Edge>();
 		visited = false;
@@ -25,11 +27,11 @@ class Vertex<T> implements VertexInterface<T>, java.io.Serializable {
 		cost = 0;
 	}
 	//Provided class
-	protected class Edge implements java.io.Serializable {
+	protected class Edge implements java.io.Serializable 
+	{
 		private VertexInterface<T> vertex;
 		private double weight;
 		
-	
 		protected Edge(VertexInterface<T> endVertex, double edgeWeight){
 			vertex = endVertex;
 			weight = edgeWeight;
@@ -47,27 +49,26 @@ class Vertex<T> implements VertexInterface<T>, java.io.Serializable {
 			return weight;
 		}
 	}
-	/* Implementations of the vertex operations go here.
-   . . . */
+	/* Implementations of the vertex operations go here. */
    //Returns label
    public T getLabel() {
-	return label;
-}
+	   return label;
+	}
 
-//Changes visited for a vertex to true
-public void visit() {
-	visited = true;
-}
+	//Changes visited for a vertex to true
+	public void visit() {
+		visited = true;
+	}
 
-//Changes visited for a vertex to false
-public void unvisit() {
-	visited = false;
-}
+	//Changes visited for a vertex to false
+	public void unvisit() {
+		visited = false;
+	}
 
-//Returns if the vertex was visited
-public boolean isVisited() {
-	return visited;
-}
+	//Returns if the vertex was visited
+	public boolean isVisited() {
+		return visited;
+	}
 	
 	//Makes a connection for the end vertex
 	public boolean connect(VertexInterface<T> endVertex) {
@@ -108,7 +109,8 @@ public boolean isVisited() {
 	}
 	
 		//provided
-	public boolean equals(Object other){
+	public boolean equals(Object other)
+	{
 		boolean result;
 		if((other == null) || (getClass() != other.getClass()))
 			result = false;
@@ -120,8 +122,8 @@ public boolean isVisited() {
 		return result;
 	}
 	//provided
-	public boolean connect(VertexInterface<T> endVertex, double edgeWeight) {
-	
+	public boolean connect(VertexInterface<T> endVertex, double edgeWeight)
+	{
 		boolean result = false;
 		if(!this.equals(endVertex)){
 			Iterator<VertexInterface<T>> neighbors = this.getNeighborIterator();
@@ -142,7 +144,8 @@ public boolean isVisited() {
 	}
 
 		//provided
-	public VertexInterface<T> getUnvisitedNeighbor() {
+	public VertexInterface<T> getUnvisitedNeighbor() 
+	{
 		VertexInterface<T> result = null;
 		Iterator<VertexInterface<T>> neighbors = getNeighborIterator();
 		while(neighbors.hasNext() && result == null){
@@ -158,7 +161,8 @@ public boolean isVisited() {
 		previousVertex = predecessor;
 	}
 		//provided
-	private class NeighborIterator implements Iterator<VertexInterface<T>>{
+	private class NeighborIterator implements Iterator<VertexInterface<T>>
+	{
 
 		Iterator<Edge> edges;
 		private NeighborIterator() {
@@ -186,7 +190,8 @@ public boolean isVisited() {
 	}
 	
 		//Inner class based off NeighborIterator
-	private class WeightIterator implements Iterator{
+	private class WeightIterator implements Iterator
+	{
 		
 		private Iterator<Edge> edgesIterator;
 		//Constructor
@@ -212,15 +217,5 @@ public boolean isVisited() {
 		}
 		
 	}
-	
 
-	
-
-
-
-	
-	
-
-	
-	
 }

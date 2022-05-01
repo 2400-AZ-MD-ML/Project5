@@ -9,7 +9,7 @@ import java.util.EmptyStackException;
 public class LinkedStack<T> implements StackInterface<T>
 {
 	private Node topNode; // References the first node in the chain
-  private boolean integrityOK = false;
+   private boolean integrityOK = false;
    public LinkedStack()
    {
       topNode = null;
@@ -44,26 +44,22 @@ public void clear(){
  /** Adds a new entry to the top of this stack.
        @param newEntry  An object to be added to the stack.
        */
-       
 public void push(T newEntry){
    topNode = new Node(newEntry, topNode);
-
 }
  /** Removes and returns this stack's top entry.
        @return  The object at the top of the stack. 
        @throws  EmptyStackException if the stack is empty before the operation. 
        */
 public T pop(){
- T pop = peek();
- topNode = topNode.getNextNode();
- return pop;
+   T pop = peek();
+   topNode = topNode.getNextNode();
+   return pop;
 }
 private void checkIntegrity(){
-   {
 	   if (!integrityOK)
 		  throw new SecurityException ("ArrayStack is corrupt.");
-	} // end checkintegrity
-}
+} // end checkintegrity
 /**  Converts an infix string to a postfix string
  * @param postFix is the infix string that will be inputted to the method to return a postFix string
  * @return the postFix version of the infix string
@@ -119,11 +115,11 @@ public String converttoPostFix(String postFix){
      }
    }
   }
-  // Add any remaining operators onto result after the loop has traversed through the string.
-while(!operatorStack.isEmpty()){
-   result += operatorStack.pop();
-}
-return result;
+   // Add any remaining operators onto result after the loop has traversed through the string.
+   while(!operatorStack.isEmpty()){
+      result += operatorStack.pop();
+   }
+   return result;
 }
 /** 
  * Returns a number based on the operator's precedence, the higher the precedence the higher the number returned

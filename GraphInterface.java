@@ -21,11 +21,6 @@ public interface GraphInterface<T> extends BasicGraphInterface<T>,
                              the label of the origin vertex at the queue's front. */
                 public QueueInterface<T> getDepthFirstTraversal(T origin);
              
-                /** Performs a topological sort of the vertices in this graph without cycles.
-                    @return  A stack of vertex labels in topological order, beginning
-                             with the stack's top. */
-                // public StackInterface<T> getTopologicalOrder();
-             
                 /** Finds the shortest-length path between two given vertices in this graph.
                     @param begin  An object that labels the path's origin vertex.
                     @param end    An object that labels the path's destination vertex.

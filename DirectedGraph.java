@@ -18,11 +18,10 @@ public class DirectedGraph<T> implements GraphInterface<T>
 		edgeCount = 0;
 	} // end default constructor
 
-/* Implementations of the graph operations go here. 
-   . . . */
+/* Implementations of the graph operations go here. */
 
-   //returns if the graph is empty
-   public boolean isEmpty()
+//returns if the graph is empty
+public boolean isEmpty()
 {
  return vertices.isEmpty();
 } // end isEmpty
@@ -50,14 +49,13 @@ public boolean hasEdge(T begin, T end)
  VertexInterface<T> endVertex = vertices.getValue(end);
  if ( (beginVertex != null) && (endVertex != null) )
  {
- Iterator<VertexInterface<T>> neighbors =
- beginVertex.getNeighborIterator();
- while (!found && neighbors.hasNext())
- {
- VertexInterface<T> nextNeighbor = neighbors.next();
- if (endVertex.equals(nextNeighbor))
- found = true;
- } // end while
+   Iterator<VertexInterface<T>> neighbors = beginVertex.getNeighborIterator();
+   while (!found && neighbors.hasNext())
+   {
+      VertexInterface<T> nextNeighbor = neighbors.next();
+      if (endVertex.equals(nextNeighbor))
+      found = true;
+   } // end while
  } // end if
  return found;
 } // end hasEdge
@@ -67,10 +65,10 @@ protected void resetVertices()
  Iterator<VertexInterface<T>> vertexIterator = vertices.getValueIterator();
  while (vertexIterator.hasNext())
  {
- VertexInterface<T> nextVertex = vertexIterator.next();
- nextVertex.unvisit();
- nextVertex.setCost(0);
- nextVertex.setPredecessor(null);
+   VertexInterface<T> nextVertex = vertexIterator.next();
+   nextVertex.unvisit();
+   nextVertex.setCost(0);
+   nextVertex.setPredecessor(null);
  } // end while
 } // end resetVertice
 
@@ -136,10 +134,12 @@ public QueueInterface<T> getDepthFirstTraversal(T origin){
    originVertex.visit();
    traversalOrder.enqueue(origin);
    vertexStack.push(originVertex);
-   while(!vertexStack.isEmpty()){
+   while(!vertexStack.isEmpty())
+   {
       VertexInterface<T> topVertex = vertexStack.peek();
       VertexInterface<T> nextNeighbor = topVertex.getUnvisitedNeighbor();
-      if(nextNeighbor != null){
+      if(nextNeighbor != null)
+      {
          nextNeighbor.visit();
          traversalOrder.enqueue(nextNeighbor.getLabel());
          vertexStack.push(nextNeighbor);

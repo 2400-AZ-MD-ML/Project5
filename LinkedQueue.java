@@ -18,43 +18,42 @@ public final class LinkedQueue<T> implements QueueInterface<T>
 		lastNode = null;
 	} // end default constructor
 
-//  < Implementations of the queue operations go here. >
-//  . . .
-public T dequeue()
-{
- T front = getFront(); // Might throw EmptyQueueException
- // Assertion: firstNode != null
- firstNode.setData(null);
- firstNode = firstNode.getNextNode();
- if (firstNode == null)
- lastNode = null;
- return front;
-} // end dequeue
-public boolean isEmpty()
-{
- return (firstNode == null) && (lastNode == null);
-} // end isEmpty
-public void clear()
-{
- firstNode = null;
- lastNode = null;
-} // end clear
-public void enqueue(T newEntry)
-{
- Node newNode = new Node(newEntry, null);
- if (isEmpty())
- firstNode = newNode;
- else
- lastNode.setNextNode(newNode);
- lastNode = newNode;
-} // end enqueue
-public T getFront()
-{
- if (isEmpty())
- throw new IllegalStateException();
- else
- return firstNode.getData();
-} // end getFront
+	//  < Implementations of the queue operations go here. >
+	public T dequeue()
+	{
+		T front = getFront(); // Might throw EmptyQueueException
+		// Assertion: firstNode != null
+		firstNode.setData(null);
+		firstNode = firstNode.getNextNode();
+		if (firstNode == null)
+		lastNode = null;
+		return front;
+	} // end dequeue
+	public boolean isEmpty()
+	{
+		return (firstNode == null) && (lastNode == null);
+	} // end isEmpty
+	public void clear()
+	{
+		firstNode = null;
+		lastNode = null;
+	} // end clear
+	public void enqueue(T newEntry)
+	{
+		Node newNode = new Node(newEntry, null);
+		if (isEmpty())
+		firstNode = newNode;
+		else
+		lastNode.setNextNode(newNode);
+		lastNode = newNode;
+	} // end enqueue
+	public T getFront()
+	{
+		if (isEmpty())
+		throw new IllegalStateException();
+		else
+		return firstNode.getData();
+	} // end getFront
 	private class Node
 	{
 		private T    data; // Entry in queue

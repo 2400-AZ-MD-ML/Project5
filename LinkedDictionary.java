@@ -16,84 +16,84 @@ public class LinkedDictionary<K, V> implements DictionaryInterface<K, V>
 	
 	public LinkedDictionary()
 	{
-	firstNode = null;		
-    numberOfEntries = 0;
+		firstNode = null;		
+		numberOfEntries = 0;
 	} // end default constructor
 	
-	// 18.25 adds key with a value
-  public V add(K key, V value)
-  {
-    V result = null;
-    
-    // search chain for a node containing key
-    Node currentNode = firstNode;
-    while ( (currentNode != null) && !key.equals(currentNode.getKey()) )
-    {
-      currentNode = currentNode.getNextNode();
-    } // end while
-    
-    if (currentNode == null)
-    {
-    	// key not in dictionary; add new node at beginning of chain
-      Node newNode = new Node(key, value);
-      newNode.setNextNode(firstNode);
-      firstNode = newNode;
-      numberOfEntries++;
-    }
-    else
-    {
-    	// key in dictionary; replace corresponding value
-      result = currentNode.getValue();
-      currentNode.setValue(value); // replace value
-    } // end if
-    
-    return result;
-  } // end add
-  //removes at given key
-  public V remove(K key)
+	// adds key with a value
+	public V add(K key, V value)
 	{
-   	V result = null;  // return value
-   	
-		if (!isEmpty())
-		{	
-    	// search chain for a node containing key;
-	    // save reference to preceding node
-			Node currentNode = firstNode;
-			Node nodeBefore = null;
-			
-    	while ( (currentNode != null) && !key.equals(currentNode.getKey()) )
-			{
-				nodeBefore = currentNode;
-				currentNode = currentNode.getNextNode();
-			} // end while
-			
-			if (currentNode != null)
-			{
-				// node found; remove it
-				Node nodeAfter = currentNode.getNextNode(); // node after the one to be removed
-
-				if (nodeBefore == null)
-					firstNode = nodeAfter;
-				else
-					nodeBefore.setNextNode(nodeAfter);        // disconnect the node to be removed
-
-				result = currentNode.getValue();            // get ready to return removed entry
-				numberOfEntries--;                              // decrease length for both cases
-			} // end if
+		V result = null;
+		
+		// search chain for a node containing key
+		Node currentNode = firstNode;
+		while ( (currentNode != null) && !key.equals(currentNode.getKey()) )
+		{
+			currentNode = currentNode.getNextNode();
+		} // end while
+		
+		if (currentNode == null)
+		{
+			// key not in dictionary; add new node at beginning of chain
+			Node newNode = new Node(key, value);
+			newNode.setNextNode(firstNode);
+			firstNode = newNode;
+			numberOfEntries++;
+		}
+		else
+		{
+			// key in dictionary; replace corresponding value
+			result = currentNode.getValue();
+			currentNode.setValue(value); // replace value
 		} // end if
-			
-    return result;  
+		
+		return result;
+	} // end add
+  	//removes at given key
+  	public V remove(K key)
+	{
+		V result = null;  // return value
+
+			if (!isEmpty())
+			{	
+			// search chain for a node containing key;
+			// save reference to preceding node
+				Node currentNode = firstNode;
+				Node nodeBefore = null;
+				
+				while ( (currentNode != null) && !key.equals(currentNode.getKey()) )
+				{
+					nodeBefore = currentNode;
+					currentNode = currentNode.getNextNode();
+				} // end while
+				
+				if (currentNode != null)
+				{
+					// node found; remove it
+					Node nodeAfter = currentNode.getNextNode(); // node after the one to be removed
+
+					if (nodeBefore == null)
+						firstNode = nodeAfter;
+					else
+						nodeBefore.setNextNode(nodeAfter);      // disconnect the node to be removed
+
+					result = currentNode.getValue();            // get ready to return removed entry
+					numberOfEntries--;                          // decrease length for both cases
+				} // end if
+			} // end if
+				
+		return result;  
   } // end remove
 
-  //gets value from the key
-  public V getValue(K key)
-  {
-  	V result = null;
+  	//gets value from the key
+  	public V getValue(K key)
+	{
+		V result = null;
 
-    // find node before the one that contains or could contain key
-		Node currentNode = firstNode;
-		
-    while ( (currentNode != null) && !key.equals(currentNode.getKey()) )
+		// find node before the one that contains or could contain key
+			Node currentNode = firstNode;
+			
+		while ( (currentNode != null) && !key.equals(currentNode.getKey()) )
 		{
 			currentNode = currentNode.getNextNode();
 		} // end while
@@ -102,37 +102,37 @@ public class LinkedDictionary<K, V> implements DictionaryInterface<K, V>
 		{
 			result = currentNode.getValue();
 		} // end if
-		
+			
 		return result;
-  } // end getValue
-  //returns if the key has a value
+	} // end getValue
+  	//returns if the key has a value
 	public boolean contains(K key)
-  {
-   	return getValue(key) != null; 
-  } // end contains
-  //Getter method to see if it is empty
-  public boolean isEmpty()
-  {
-    return numberOfEntries == 0;
-  } // end isEmpty
-//Getter method to check if it is full
-  public boolean isFull()
-  {
-    return false;
-  } // end isFull
-  //Returns the size
-  public int getSize()
-  {
-    return numberOfEntries;
-  } // end getSize
-  //Makes the firstNode that we only have reference to null then resets numberOfEntries
+	{
+		return getValue(key) != null; 
+	} // end contains
+  	//Getter method to see if it is empty
+  	public boolean isEmpty()
+	{
+		return numberOfEntries == 0;
+	} // end isEmpty
+	//Getter method to check if it is full
+	public boolean isFull()
+	{
+		return false;
+	} // end isFull
+	//Returns the size
+	public int getSize()
+	{
+		return numberOfEntries;
+	} // end getSize
+  	//Makes the firstNode that we only have reference to null then resets numberOfEntries
 	public final void clear()
 	{ 
 		firstNode = null;		
 		numberOfEntries = 0;
-  } // end clear	
+  	} // end clear	
 
-  		//Returns new Instance of KeyIterator
+  	//Returns new Instance of KeyIterator
 	public Iterator<K> getKeyIterator()
 	{
 		return new KeyIterator();
@@ -180,7 +180,7 @@ public class LinkedDictionary<K, V> implements DictionaryInterface<K, V>
 			throw new UnsupportedOperationException();
 		} // end remove
 	} // end KeyIterator 
-		//Like KeyIterator Based off Vertex's Neighbor/Weight Iterator class
+	//Like KeyIterator Based off Vertex's Neighbor/Weight Iterator class
 	private class ValueIterator implements Iterator<V>
 	{
 		private Node nextNode;
